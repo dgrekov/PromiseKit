@@ -32,10 +32,10 @@ extension ACAccountStore {
     }
 
     public func saveAccount(account: ACAccount) -> Promise<Void> {
-        return Promise<Bool> { saveAccount(account, withCompletionHandler: $0.resolve) }.asVoid()
+        return Promise { saveAccount(account, withCompletionHandler: $0.resolve) }.asVoid()
     }
 
     public func removeAccount(account: ACAccount) -> Promise<Void> {
-        return Promise<Bool> { removeAccount(account, withCompletionHandler: $0.resolve) }.asVoid()
+        return Promise { removeAccount(account, withCompletionHandler: $0.resolve) }.asVoid()
     }
 }

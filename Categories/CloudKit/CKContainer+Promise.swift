@@ -25,14 +25,14 @@ extension CKContainer {
     }
 
     public func discoverAllContactUserInfos() -> Promise<[CKDiscoveredUserInfo]> {
-        return Promise<[AnyObject]> { self.discoverAllContactUserInfosWithCompletionHandler($0.resolve) }.then(on: zalgo) { $0 as! [CKDiscoveredUserInfo] }
+        return Promise<[CKDiscoveredUserInfo]> { self.discoverAllContactUserInfosWithCompletionHandler($0.resolve) }
     }
 
-    public func discoverUserInfo(# email: String) -> Promise<CKDiscoveredUserInfo> {
+    public func discoverUserInfo(email email: String) -> Promise<CKDiscoveredUserInfo> {
         return Promise { discoverUserInfoWithEmailAddress(email, completionHandler: $0.resolve) }
     }
 
-    public func discoverUserInfo(# recordID: CKRecordID) -> Promise<CKDiscoveredUserInfo> {
+    public func discoverUserInfo(recordID recordID: CKRecordID) -> Promise<CKDiscoveredUserInfo> {
         return Promise { discoverUserInfoWithUserRecordID(recordID, completionHandler: $0.resolve) }
     }
 
