@@ -42,9 +42,9 @@ public class URLDataPromise: Promise<NSData> {
         }
     }
 
-    private override init(@noescape resolvers: (fulfill: (NSData) -> Void, reject: (ErrorType) -> Void) throws -> Void) {
-        super.init(resolvers: resolvers)
-    }
+//    private override init(@noescape resolvers: (fulfill: (NSData) -> Void, reject: (ErrorType) -> Void) throws -> Void) {
+//        super.init(resolvers: resolvers)
+//    }
 
     public override init(error: ErrorType) {
         super.init(error: error)
@@ -53,26 +53,26 @@ public class URLDataPromise: Promise<NSData> {
     private var URLRequest: NSURLRequest!
     private var URLResponse: NSURLResponse!
 
-    public class func go(request: NSURLRequest, @noescape body: ((NSData?, NSURLResponse?, NSError?) -> Void) -> Void) -> URLDataPromise {
-        var promise: URLDataPromise!
-        promise = URLDataPromise { fulfill, reject in
-            body { data, rsp, error in
-                promise.URLRequest = request
-                promise.URLResponse = rsp
-
-                if let error = error {
-                    reject(URLError.UnderlyingCocoaError(request, data, rsp, error))
-                } else if let data = data, rsp = rsp as? NSHTTPURLResponse where rsp.statusCode >= 200 && rsp.statusCode < 300 {
-                    fulfill(data)
-                } else if let data = data where !(rsp is NSHTTPURLResponse) {
-                    fulfill(data)
-                } else {
-                    reject(URLError.BadResponse(request, data, rsp))
-                }
-            }
-        }
-        return promise
-    }
+//    public class func go(request: NSURLRequest, @noescape body: ((NSData?, NSURLResponse?, NSError?) -> Void) -> Void) -> URLDataPromise {
+//        var promise: URLDataPromise!
+//        promise = URLDataPromise { fulfill, reject in
+//            body { data, rsp, error in
+//                promise.URLRequest = request
+//                promise.URLResponse = rsp
+//
+//                if let error = error {
+//                    reject(URLError.UnderlyingCocoaError(request, data, rsp, error))
+//                } else if let data = data, rsp = rsp as? NSHTTPURLResponse where rsp.statusCode >= 200 && rsp.statusCode < 300 {
+//                    fulfill(data)
+//                } else if let data = data where !(rsp is NSHTTPURLResponse) {
+//                    fulfill(data)
+//                } else {
+//                    reject(URLError.BadResponse(request, data, rsp))
+//                }
+//            }
+//        }
+//        return promise
+//    }
 }
 
 #if os(iOS)
